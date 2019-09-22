@@ -1,5 +1,7 @@
 {
-    "token": "NTk1NTU1MjQ5NTAzMzM4NTA2.XYeDlQ.PjHd_rMlLQ6ci78f1wiOuglNa_w",
-    "prefix": "++",
-    "ownerID": "595555249503338506"
+    "bot": {
+        "token": "NTk1NTU1MjQ5NTAzMzM4NTA2.XYeFTA.8WgxXT9R5DlX7tR7_za6UjcI_mE",
+        "prefix": "++",
+        "ownerID": "595555249503338506"
+    }
 }
