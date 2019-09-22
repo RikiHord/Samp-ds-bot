@@ -108,4 +108,4 @@ bot.on("message", async message => {
   }
 });
 
-bot.login(option.token);
+bot.login(option.bot.token);
