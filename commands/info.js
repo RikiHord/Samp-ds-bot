@@ -9,6 +9,7 @@ let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
 
 module.exports.run = async (bot, message, args) => {
     message.delete().catch(error =>message.reply("Ошибка"));
+    console.log("AAAAAAAAAAAAAAAA");
 
     let id = message.author.id;
 
