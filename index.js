@@ -71,6 +71,7 @@ bot.on('guildMemberAdd', member =>{
 });
 
 bot.on("message", async message => {
+  console.log("aga");
 
   bot.emit('checkMessage', message);
 
@@ -94,14 +95,20 @@ bot.on("message", async message => {
   //let args = message.content.substr(2).split(" ");
   //let args = message.content.slice(prefix.length).trim().split(' ');
   //let cmd = args.shift().toLowerCase();
+  console.log("aga1");
 
   if(message.author.bot) return;
+  console.log("aga2");
+
   if(message.channel.type === "dm") return;
+  console.log("aga3");
 
   let messageArray = message.content.split(/\s+/g);
   let command = messageArray[0];
   let args = messageArray.slice(1);
   if(!command.startsWith(prefix)) return;
+  console.log("aga4");
+
 
   let cmd = bot.commands.get(command.slice(prefix.length));
   console.log("tyt");
