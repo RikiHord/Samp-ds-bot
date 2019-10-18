@@ -91,7 +91,7 @@ bot.on("message", async message => {
   }
 
   let prefix = option.prefix;
-  let args = message.content.substr(prefix.length).split(" ");
+  let args = message.content.substr(2).split(" ");
   //let args = message.content.slice(prefix.length).trim().split(' ');
   let cmd = args.shift().toLowerCase();
 
