@@ -1,27 +1,38 @@
 {
-  "name": "dj_wolf",
+  "name": "samp-ds-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "8.x",
+    "npm": "6.x"
+  },
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "dotenv": "^8.2.0",
-    "ffmpeg": "0.0.4",
-    "json-prefix": "0.0.3",
-    "ms": "^2.1.1",
-    "opusscript": "0.0.6",
-    "package": "^1.0.1",
-    "package-lock": "^1.0.0",
-    "prism-media": "^1.0.2",
-    "youtube-api-v3-search": "^1.2.1",
-    "youtube-search": "^1.1.4",
-    "yt-search": "^0.4.1",
-    "ytdl-core": "^0.28.0"
+    "bufferutil": "^4.0.1",
+    "discord-anti-spam": "^2.0.0",
+    "discord.js": "^11.5.1",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "libsodium-wrappers": "^0.7.4",
+    "ms": "^2.1.2",
+    "mysql": "^2.17.1",
+    "node.js": "^0.0.0",
+    "opusscript": "^0.0.6",
+    "sqlite3": "^4.1.0",
+    "uws": "^100.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RikiHord/Samp-ds-bot.git"
+  },
+  "author": "RikiLab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RikiHord/Samp-ds-bot/issues"
+  },
+  "homepage": "https://github.com/RikiHord/Samp-ds-bot#readme"
 }
