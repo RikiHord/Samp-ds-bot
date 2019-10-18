@@ -102,11 +102,9 @@ bot.on("message", async message => {
   let command = messageArray[0];
   let args = messageArray.slice(1);
   if(!command.startsWith(prefix)) return;
-  console.log("aga4");
 
 
   let cmd = bot.commands.get(command.slice(prefix.length));
-  console.log("tyt");
   if(cmd) cmd.run(bot, message, args);
 
   /*try {

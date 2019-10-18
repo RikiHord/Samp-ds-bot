@@ -9,7 +9,6 @@ let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
 
 module.exports.run = async (bot, message, args) => {
     message.delete().catch(error =>message.reply("Ошибка"));
-    console.log("AAAAAAAAAAAAAAAA");
 
     let id = message.author.id;
 
@@ -31,13 +30,13 @@ module.exports.run = async (bot, message, args) => {
     else{
         let taggedUser = message.mentions.users.first() || message.author;
         let embed = new Discord.RichEmbed()
-        .setAuthor(`${searchRes.name_user}`)
+        .setAuthor(`${result.name_user}`)
         .setColor("#15f153")
         .setThumbnail(taggedUser.displayAvatarURL)
-        .addField(`Уровень`, `${searchRes.lvl}`)
-        .addField(`Баланс`, `${searchRes.money}$`)
-        .addField(`Локация`, `${searchRes.location}`)
-        .addField(`Фракция`, `${searchRes2.fraction_name}`)
+        .addField(`Уровень`, `${result.lvl}`)
+        .addField(`Баланс`, `${result.money}$`)
+        .addField(`Локация`, `${result.location}`)
+        .addField(`Фракция`, `${result2.fraction_name}`)
 
         message.author.send(embed);
     }
