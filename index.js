@@ -3,12 +3,6 @@ const Discord = require("discord.js");
 const mybot = new Discord.Client();
 mybot.commands = new Discord.Collection();
 require("dotenv/config");
-const http = require("http");
-const port = process.env.PORT || 3000;
-
-http.createServer().listen(port);
-
-const token = process.env.TOKEN
 
 mybot.on("ready", async () => {
     console.log(`Started!`);
@@ -45,4 +39,4 @@ mybot.on("ready", async () => {
   });
   
 
-mybot.login(token);
+mybot.login(process.env.TOKEN);
