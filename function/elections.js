@@ -191,9 +191,9 @@ async function elections (message) {
                         }
                 });
                 });
-            },20000);
+            },200000000);
         }
         });
-    },50000);
+    },500000000);
 }
 module.exports =  elections;
