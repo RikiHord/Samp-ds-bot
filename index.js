@@ -101,6 +101,7 @@ bot.on("message", async message => {
   let messageArray = message.content.split(/\s+/g);
   let command = messageArray[0].substr(0,2);
   let args = messageArray.slice(1);
+  console.log(!command.startsWith(prefix));
   if(!command.startsWith(prefix)) return;
   console.log("aga4");
 
