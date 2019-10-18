@@ -104,6 +104,7 @@ bot.on("message", async message => {
   if(!command.startsWith(prefix)) return;
 
   let cmd = bot.commands.get(command.slice(prefix.length));
+  console.log("tyt");
   if(cmd) cmd.run(bot, message, args);
 
   /*try {
