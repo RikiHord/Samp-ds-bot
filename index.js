@@ -27,7 +27,7 @@ fs.readdir("./commands/", (err, files) => {
     return;
   }
   
-  jsfile.forEach((f, i) =>{
+  jsfile.forEach((f) =>{
     let props = require(`./commands/${f}`);
     console.log(`${f} loaded!`);
     bot.commands.set(props.help.name, props);
@@ -91,14 +91,22 @@ bot.on("message", async message => {
   }
 
   let prefix = option.prefix;
-  let args = message.content.substr(2).split(" ");
+  //let args = message.content.substr(2).split(" ");
   //let args = message.content.slice(prefix.length).trim().split(' ');
-  let cmd = args.shift().toLowerCase();
+  //let cmd = args.shift().toLowerCase();
 
   if(message.author.bot) return;
-  if(!message.content.startsWith(prefix)) return;
+  if(message.channel.type === "dm") return;
 
-  try {
+  let messageArray = message.content.split(/\s+/g);
+  let command = messageArray[0];
+  let args = messageArray.slice(1);
+  if(!command.startsWith(prefix)) return;
+
+  let cmd = bot.commands.get(command.slice(prefix.length));
+  if(cmd) cmd.run(bot, message, args);
+
+  /*try {
     delete require.cache[require.resolve(`./commands/${cmd}.js`)];
 
       
@@ -106,7 +114,7 @@ bot.on("message", async message => {
     commandFile.run(bot, message, args);
   }catch(e){
     console.log(e.stack);
-  }
+  }*/
 });
 
 bot.login(process.env.TOKEN);
