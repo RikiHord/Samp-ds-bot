@@ -36,7 +36,7 @@ function findDB(id, name, message, named){
             });
       }
       else{
-         message.author.send(`Вы уже зарегестрированы под именем ${searchRes.name_user}`);
+         message.author.send(`Вы уже зарегестрированы под именем ${result.name_user}`);
       }
       });
 }
