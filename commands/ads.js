@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args, db) => {
             }
         
         if(result == undefined){
-            notreg(); //Игрок не зарегестрирован
+            notreg(message); //Игрок не зарегестрирован
         }
         else{
             if(+(result.money) < 100){

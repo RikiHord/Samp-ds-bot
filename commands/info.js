@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args, db) => {
             console.error(err.message);
         }
 
-        if(result == undefined) notreg(); //Игрок не зарегестрирован
+        if(result == undefined) notreg(message); //Игрок не зарегестрирован
         else{
         //Поиск названия фракции по fraction_id игрока
         let sql = `SELECT * FROM fractions WHERE fraction_id = ${result.fraction_id}`;

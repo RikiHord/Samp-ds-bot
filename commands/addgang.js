@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args, db) => {
                 console.error(err.message);
             }
         if(result == undefined){
-            notreg(); //Игрок не зарегестрирован
+            notreg(message); //Игрок не зарегестрирован
         }
         else{
             //Проверка идут ли сейчас выборы
