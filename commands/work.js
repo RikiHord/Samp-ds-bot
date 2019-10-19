@@ -1,14 +1,8 @@
 const Discord = require('discord.js');
 const notreg = require('../function/notreg.js');
 const ms = require('ms');
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-    if(err){
-      console.log(error.message);
-    }
-});
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, db) => {
     message.delete().catch(error =>message.reply("Ошибка"));
 
     var id = message.author.id;
@@ -24,10 +18,10 @@ module.exports.run = async (bot, message, args) => {
     }
 
     if(result == undefined){
-        notreg();
+        notreg(message);
     }
     else{
-        let loc = `'${searchRes.location}'`
+        let loc = `'${result.location}'`
         let sql = `SELECT * FROM locations WHERE location = ${loc}`;
         db.get(sql, (err, result2) => {
             if (err) {

@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const findDB = require('../function/findDB');
-const fs = require('fs');
 
 module.exports.run = async (bot, message, args) => {
     message.delete().catch(error =>message.reply("Ошибка"));

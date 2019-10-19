@@ -1,13 +1,7 @@
 const Discord = require('discord.js');
 const notreg = require('../function/notreg.js');
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-    if(err){
-      console.log(error.message);
-    }
-});
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, db) => {
     message.delete().catch(error =>message.reply("Ошибка"));
 
     let id = message.author.id;
@@ -24,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
             }
             
             if(result == undefined){
-                notreg();
+                notreg(message);
             }
             else{
                 var member = message.mentions.members.first() || message.guild.members.get(id);
@@ -32,12 +26,12 @@ module.exports.run = async (bot, message, args) => {
                 if(member.roles.has(work.id)) {return message.author.send(`Пока вы работаете перемешение не возможно`);}
                 work = message.guild.roles.find(`name`, `Заключенный`);
                 if(member.roles.has(work.id)){return message.author.send(`Вы пытались збежать?`);}
-                else {role(searchRes, member);}
+                else {role(result, member);}
             }
         });
 
-        async function role(searchRes, member){
-            let role = searchRes.location;
+        async function role(result, member){
+            let role = result.location;
 
             if(role == args[0]){
                 message.author.send("Вы и так уже здесь!");

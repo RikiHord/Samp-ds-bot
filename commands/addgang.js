@@ -82,7 +82,7 @@ module.exports.run = async (bot, message, args, db) => {
                                     if (err) {
                                         console.error(err.message);
                                 }
-                            newschannel.send(`**${searchRes.name_user}** кинул вызов текущему главе!`);
+                            newschannel.send(`**${result.name_user}** кинул вызов текущему главе!`);
                             });
                             }
                             else{

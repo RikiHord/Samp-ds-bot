@@ -1,13 +1,7 @@
 const Discord = require('discord.js');
 const notreg = require('../function/notreg.js');
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-    if(err){
-      console.log(error.message);
-    }
-});
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, db) => {
     message.delete().catch(error =>message.reply("Ошибка"));
     
     let id = message.author.id;
@@ -24,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
     }
 
     if(result == undefined){
-        notreg();
+        notreg(message);
     }
     else{
         if(result.fraction_id == 0){
@@ -71,19 +65,19 @@ module.exports.run = async (bot, message, args) => {
                     return message.author.send("Вы не можете покинуть банду пока вы глава");
                 }
                 else{
-                    db.get(sql2, (err, result3) => {
+                    db.get(sql2, (err) => {
                         if (err) {
                             console.error(err.message);
                         }
                     });
                     sql = `UPDATE users SET fraction_id = 0 WHERE id_user = ${`'`+id+`'`}`;
-                    db.get(sql, (err, result4) => {
+                    db.get(sql, (err) => {
                     if (err) {
                         console.error(err.message);
                     } 
                     let member = message.mentions.members.first() || message.guild.members.get(id);
                     member.removeRole(gRole.id);
-                    return message.channel.send(`${searchRes.name_user} покинул банду!`);
+                    return message.channel.send(`${result.name_user} покинул банду!`);
                 });
                 }
             });

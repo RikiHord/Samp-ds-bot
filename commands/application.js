@@ -1,13 +1,7 @@
 const Discord = require('discord.js');
 const notreg = require('../function/notreg.js');
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-    if(err){
-      console.log(error.message);
-    }
-});
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, db) => {
     message.delete().catch(error =>message.reply("Ошибка"));
     const newschannel = message.guild.channels.find(`name`, "📻радио");
 
@@ -20,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
             }
         
         if(result == undefined){
-            notreg();
+            notreg(message);
         }
         else{
             sql = `SELECT election FROM settings`;
@@ -58,14 +52,14 @@ module.exports.run = async (bot, message, args) => {
                             console.error(err.message);
                         }
                     });
-                    let name = `'`+searchRes.name_user+`'`;
+                    let name = `'`+result.name_user+`'`;
                     let ids = `'`+id+`'`;
                     sql = `INSERT INTO candidates VALUES (${ids} , ${name})`;
                     db.get(sql, (err, result) => {
                         if (err) {
                             console.error(err.message);
                         }
-                        newschannel.send(`**${searchRes.name_user}** новый кандидат в меры города!`);
+                        newschannel.send(`**${result.name_user}** новый кандидат в меры города!`);
                     });
                     }
                     else{
