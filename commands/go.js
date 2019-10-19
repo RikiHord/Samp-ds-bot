@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args, db) => {
             }
             
             if(result == undefined){
-                notreg(message);
+                notreg(message); //Игрок не зарегестрирован
             }
             else{
                 var member = message.mentions.members.first() || message.guild.members.get(id);
