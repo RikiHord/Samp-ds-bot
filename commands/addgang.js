@@ -1,26 +1,22 @@
 const Discord = require('discord.js');
 const notreg = require('../function/notreg.js');
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-    if(err){
-      console.log(error.message);
-    }
-});
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, db) => {
     message.delete().catch(error =>message.reply("Ошибка"));
 
     let id = message.author.id;
 
+    //Поиск имени и айди фракции игрока
     let sql = `SELECT id_user, name_user, fraction_id FROM users WHERE id_user = ${id}`;
         db.get(sql, (err, result) => {
             if (err) {
                 console.error(err.message);
             }
         if(result == undefined){
-            notreg();
+            notreg(); //Игрок не зарегестрирован
         }
         else{
+            //Проверка идут ли сейчас выборы
             sql = `SELECT election FROM settings`;
             db.get(sql, (err, result2) => {
                 if (err) {
@@ -28,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
                 }
             
             if(result2 == undefined){
-                message.author.send(`Сейчас не время выборов!`);
+                message.author.send(`Сейчас не время выборов!`); //Не идут выборы
             }
             else{
                 let tableName = ``;
@@ -61,6 +57,7 @@ module.exports.run = async (bot, message, args) => {
                 }
                 var newschannel = message.guild.channels.find(`name`, newsCName);
                 if(boolFraction){
+                    //Поиск игрока в кандидатах на выборы
                     sql = `SELECT * FROM ${tableName} WHERE id_user = ${id}`;
                     db.get(sql, (err, result3) => {
                         if (err) {
@@ -69,6 +66,7 @@ module.exports.run = async (bot, message, args) => {
                         
                         if(result3 != undefined){ return message.author.send(`Вы уже участвуете!`);}
                         else{
+                            //Количество кандидатов (максимум 5)
                             sql = `SELECT COUNT(*) AS count FROM candidates`;
                             db.get(sql, (err, result4) => {
                                 if (err) {
@@ -78,6 +76,7 @@ module.exports.run = async (bot, message, args) => {
                             if(result4.count < 5){
                             let name = `'`+result.name_user+`'`;
                             let ids = `'`+id+`'`;
+                            //Запись нового кандидата
                             sql = `INSERT INTO ${tableName} VALUES (${ids} , ${name})`;
                                 db.get(sql, (err, result5) => {
                                     if (err) {

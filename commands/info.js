@@ -13,6 +13,7 @@ module.exports.run = async (bot, message, args, db) => {
             console.error(err.message);
         }
 
+        if(result == undefined) notreg(); //Игрок не зарегестрирован
         //Поиск названия фракции по fraction_id игрока
         let sql = `SELECT * FROM fractions WHERE fraction_id = ${result.fraction_id}`;
         db.get(sql, (err, result2) => {
@@ -20,10 +21,6 @@ module.exports.run = async (bot, message, args, db) => {
                 console.error(err.message);
             }
 
-            if(result == undefined){
-                notreg(); //Игрок не зарегестрирован
-            }
-            else{
                 //Список информации о игроке
                 let taggedUser = message.mentions.users.first() || message.author;
                 let embed = new Discord.RichEmbed()
@@ -36,7 +33,6 @@ module.exports.run = async (bot, message, args, db) => {
                 .addField(`Фракция`, `${result2.fraction_name}`)
 
                 message.author.send(embed);
-            }
         });
     });
 }
