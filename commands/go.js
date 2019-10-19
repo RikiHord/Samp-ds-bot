@@ -11,6 +11,7 @@ module.exports.run = async (bot, message, args, db) => {
         return message.author.send("Куда ехать будем. Укажите точку прибытия!");
     }
     else{
+        //Поиск где находится игрок
         let sql = `SELECT id_user, location FROM users WHERE id_user = ${id}`;
         db.get(sql, (err, result) => {
             if (err) {
