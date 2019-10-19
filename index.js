@@ -11,6 +11,7 @@ const antispam = require('discord-anti-spam');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
+//Подключение к БД
 let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
   if(err){
     console.log(error.message);
@@ -18,6 +19,7 @@ let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
   console.log('Connected to sads.db');
 });
 
+//Загрузка команд
 fs.readdir("./commands/", (err, files) => {
 
   if(err) console.log(err);
@@ -35,7 +37,10 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 bot.on('ready', () => {
+
   console.log(`Started ${bot.user.tag}!`);
+
+  //Антиспам модуль
   antispam(bot, {
     warnBuffer: 4, 
     maxBuffer: 8, 
@@ -48,6 +53,7 @@ bot.on('ready', () => {
     exemptRoles: ["Разработчик", "SADS-Bot","Глав. Модератор","Модератор"] 
   });
 
+  //Активность бота
   var getInfo = setInterval(function(){
   var date = new Date();
   var timeinfo = `Time: ${date.getHours()}:${date.getMinutes()}`;
@@ -55,25 +61,22 @@ bot.on('ready', () => {
   var item = info[Math.floor(Math.random()*info.length)];
   bot.user.setActivity(item);
   },5000);
-  /*var item = 0;
-  var text = setInterval(function(){
-    var textinfo = Array(`H`,`He`,`Hel`,`Hell`,`Hello`);
-    if(item >= textinfo.length) item = 0;
-    bot.user.setActivity(textinfo[item]);
-    item++;
-  }, 2000);*/
 });
 
 bot.on('guildMemberAdd', member =>{
+
+  //Выдача начальной роли игрокам
   const guild = member.guild;
   let gRole = guild.roles.find(`name`, 'Не зарегистрирован');
   member.addRole(gRole.id);
+
 });
 
 bot.on("message", async message => {
 
   bot.emit('checkMessage', message);
 
+  //Запуск скриптов на выборы в игре
   if(message.content.slice(0).trim().split(' ') == `start:script`){
     message.delete().catch(error => message.reply("Ошибка"));
     if(message.member.roles.some(r=> ["Разработчик"].includes(r.name))){
@@ -91,9 +94,6 @@ bot.on("message", async message => {
   }
 
   let prefix = option.prefix;
-  //let args = message.content.substr(2).split(" ");
-  //let args = message.content.slice(prefix.length).trim().split(' ');
-  //let cmd = args.shift().toLowerCase();
 
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -105,17 +105,8 @@ bot.on("message", async message => {
 
 
   let cmd = bot.commands.get(command.slice(prefix.length));
-  if(cmd) cmd.run(bot, message, args);
+  if(cmd) cmd.run(bot, message, args, db);
 
-  /*try {
-    delete require.cache[require.resolve(`./commands/${cmd}.js`)];
-
-      
-    let commandFile = require(`./commands/${cmd}.js`);
-    commandFile.run(bot, message, args);
-  }catch(e){
-    console.log(e.stack);
-  }*/
 });
 
 bot.login(process.env.TOKEN);
