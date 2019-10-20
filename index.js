@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const sqlite3 = require('sqlite3').verbose();
+//const sqlite3 = require('sqlite3').verbose();
 const option = require('./option.json');
 const elections = require('./function/elections');
 const topLvl = require('./function/topLvl');
@@ -12,12 +12,24 @@ const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
 //Подключение к БД
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
+/*let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
   if(err){
     console.log(error.message);
   }
   console.log('Connected to sads.db');
+});*/
+const {Client} = require('pg');
+const client = new Client({
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  host: process.env.HOST,
+  port: 5432,
+  database: process.env.DATABASE
 });
+
+client.connect()
+.then(() => console.log("Connected"))
+.catch(e => console.log(e))
 
 //Загрузка команд
 fs.readdir("./commands/", (err, files) => {
