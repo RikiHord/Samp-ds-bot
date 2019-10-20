@@ -20,7 +20,7 @@ bot.commands = new Discord.Collection();
 });*/
 
 const {Client} = require('pg');
-const client = new Client({
+const db = new Client({
   user: process.env.USER,
   password: process.env.PASSWORD,
   host: process.env.HOST,
@@ -28,7 +28,7 @@ const client = new Client({
   database: process.env.DATABASE
 });
 
-client.connect()
+db.connect()
 .then(() => console.log("Connected"))
 .catch(e => console.log(e))
 
