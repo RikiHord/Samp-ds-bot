@@ -18,6 +18,7 @@ bot.commands = new Discord.Collection();
   }
   console.log('Connected to sads.db');
 });*/
+
 const {Client} = require('pg');
 const client = new Client({
   user: process.env.USER,
