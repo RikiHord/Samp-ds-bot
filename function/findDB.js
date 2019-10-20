@@ -1,23 +1,31 @@
 const Discord = require('discord.js');
-const sqlite3 = require('sqlite3').verbose();
+//const sqlite3 = require('sqlite3').verbose();
 const writeDB = require('./writeDB');
 
-let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
+/*let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
    if(err){
      console.log(error.message);
    }
+});*/
+const {Client} = require('pg');
+const db = new Client({
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  host: process.env.HOST,
+  port: 5432,
+  database: process.env.DATABASE
 });
 
 function findDB(id, name, message, named){
    let sql = `SELECT * FROM users WHERE id_user = ${id}`;
-   db.get(sql, (err, result) => {
+   db.query(sql, (err, result) => {
       if (err) {
          console.error(err.message);
       }
 
       if(result == undefined){
          let sql = `SELECT name_user FROM users WHERE name_user = ${name}`;
-            db.get(sql, (err, result2) => {
+            db.query(sql, (err, result2) => {
                if (err) {
                   console.error(err.message);
                } 

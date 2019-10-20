@@ -1,17 +1,25 @@
 const Discord = require('discord.js');
-const sqlite3 = require('sqlite3').verbose();
+/*const sqlite3 = require('sqlite3').verbose();
 
  let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
     if(err){
       console.log(error.message);
     }
-  });
+  });*/
+  const {Client} = require('pg');
+const db = new Client({
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  host: process.env.HOST,
+  port: 5432,
+  database: process.env.DATABASE
+});
 
 function writeDB(id, name, message){
     let location = `'Вокзал'`;
 
     let sql = 'INSERT INTO users VALUES (' + [`'`+id+`'`, name, location, 100, 1, 0, 0].join(',') + ')';
-    db.get(sql, (err) => {
+    db.query(sql, (err) => {
         if (err) 
             return console.error(err.message);
             role();
