@@ -22,14 +22,14 @@ function findDB(id, name, message, named){
       if (err) {
          console.error(err.message);
       }
-
+console.log("l");
       if(result == undefined){
          let sql = `SELECT name_user FROM users WHERE name_user = ${name}`;
             db.query(sql, (err, result2) => {
                if (err) {
                   console.error(err.message);
                } 
-
+console.log("h");
                if(result2 == undefined){
                   if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('I don\'t have permission to change your nickname!');
                   message.member.setNickname(named);
