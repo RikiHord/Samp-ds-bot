@@ -23,6 +23,7 @@ const client = new Client({
   user: process.env.USER,
   password: process.env.PASSWORD,
   host: process.env.HOST,
+  path: process.env.PATH,
   port: 5432,
   database: process.env.DATABASE
 });
