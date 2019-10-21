@@ -19,6 +19,7 @@ module.exports.run = async (bot, message, args) => {
     }
     else{
         let name = "'" + named + "'";
+        console.log('lol');
         findDB(id, name, message, named);
     }
 }
