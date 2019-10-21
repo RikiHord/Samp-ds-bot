@@ -17,12 +17,14 @@ const db = new Client({
 });
 
 function findDB(id, name, message, named){
+   console.log("aaa")
    let sql = { 
       name: 'fetch-user',
       text: `SELECT * FROM users WHERE id_user = $1`,
       values: [id]
    }
    db.query(sql, (err, result) => {
+      console.log("ne rabotaet")
       if (err) {
          console.error(err.message);
       }
