@@ -23,8 +23,9 @@ function findDB(id, name, message, named){
       text: `SELECT * FROM users WHERE id_user = $1`,
       values: [id]
    }
+   try{
    db.query(sql, (err, result) => {
-      console.log("ne rabotaet")
+      console.log("ne rabotaet ")
       if (err) {
          console.error(err.message);
       }
@@ -53,5 +54,9 @@ console.log("h");
          message.author.send(`Вы уже зарегестрированы под именем ${result.name_user}`);
       }
       });
+   }
+   catch(err){
+      console.log(err);
+   }
 }
 module.exports = findDB;
