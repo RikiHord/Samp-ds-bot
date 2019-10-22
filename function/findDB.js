@@ -16,6 +16,8 @@ const db = new Client({
   database: process.env.DATABASE
 });
 
+db.connect();
+
 function findDB(id, name, message, named){
    console.log("aaa")
    let sql = { 
