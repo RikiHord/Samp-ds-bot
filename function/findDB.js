@@ -1,12 +1,6 @@
 const Discord = require('discord.js');
-//const sqlite3 = require('sqlite3').verbose();
 const writeDB = require('./writeDB');
 
-/*let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-   if(err){
-     console.log(error.message);
-   }
-});*/
 const {Client} = require('pg');
 const db = new Client({
   user: process.env.USER,
@@ -19,25 +13,21 @@ const db = new Client({
 db.connect();
 
 function findDB(id, name, message, named){
-   console.log("aaa")
    let sql = { 
       text: `SELECT * FROM users WHERE id_user = $1`,
       values: [id]
    }
    try{
    db.query(sql, (err, result) => {
-      console.log("ne rabotaet ")
       if (err) {
          console.error(err.message);
       }
-console.log("l");
       if(result == undefined){
          let sql = `SELECT name_user FROM users WHERE name_user = ${name}`;
             db.query(sql, (err, result2) => {
                if (err) {
                   console.error(err.message);
                } 
-console.log("h");
                if(result2 == undefined){
                   if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('I don\'t have permission to change your nickname!');
                   message.member.setNickname(named);

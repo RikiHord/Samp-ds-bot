@@ -1,12 +1,6 @@
 const Discord = require('discord.js');
-/*const sqlite3 = require('sqlite3').verbose();
 
- let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-    if(err){
-      console.log(error.message);
-    }
-  });*/
-  const {Client} = require('pg');
+const {Client} = require('pg');
 const db = new Client({
   user: process.env.USER,
   password: process.env.PASSWORD,
@@ -14,6 +8,8 @@ const db = new Client({
   port: 5432,
   database: process.env.DATABASE
 });
+
+db.connect();
 
 function writeDB(id, name, message){
     let location = `'Вокзал'`;

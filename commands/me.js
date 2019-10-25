@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, db) => {
     let id = message.author.id;
 
     let sql = `SELECT id_user, name_user FROM users WHERE id_user = ${id}`;
-    db.get(sql, (err, result) => {
+    db.quary(sql, (err, result) => {
         if (err) {
             console.error(err.message);
         }

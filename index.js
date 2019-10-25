@@ -11,14 +11,6 @@ const antispam = require('discord-anti-spam');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
-//Подключение к БД
-/*let db = new sqlite3.Database('./sqlite/sads.db', (err)=>{
-  if(err){
-    console.log(error.message);
-  }
-  console.log('Connected to sads.db');
-});*/
-
 const {Client} = require('pg');
 const db = new Client({
   user: process.env.USER,
