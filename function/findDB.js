@@ -22,7 +22,7 @@ function findDB(id, name, message, named){
       if (err) {
          console.error(err.message);
       }
-      if(result == undefined){
+      if(result.id_user == undefined){
          let sql = `SELECT name_user FROM users WHERE name_user = ${name}`;
             db.query(sql, (err, result2) => {
                if (err) {
