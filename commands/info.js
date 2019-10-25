@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args, db) => {
 
     //Поиск игрока по id что бы получить всю информацию из бд
     let sql = `SELECT * FROM users WHERE id_user = ${id}`;
-    db.quary(sql, (err, result) => {
+    db.query(sql, (err, result) => {
         if (err) {
             console.error(err.message);
         }
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args, db) => {
         else{
         //Поиск названия фракции по fraction_id игрока
         let sql = `SELECT * FROM fractions WHERE fraction_id = ${result.fraction_id}`;
-        db.quary(sql, (err, result2) => {
+        db.query(sql, (err, result2) => {
             if (err) {
                 console.error(err.message);
             }

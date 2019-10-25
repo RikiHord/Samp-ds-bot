@@ -16,9 +16,8 @@ function writeDB(id, name, message){
 
     let sql = 'INSERT INTO users VALUES (' + [`'`+id+`'`, name, location, 100, 1, 0, 0].join(',') + ')';
     db.query(sql, (err) => {
-        if (err) 
-            return console.error(err.message);
-            role();
+        if (err) return console.error(err.message);
+        role();
         return message.channel.send(`Поздравляем с регистрацией. Ваш ник в игре: ${name}`);
     });
 
