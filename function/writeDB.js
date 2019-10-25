@@ -14,7 +14,7 @@ db.connect();
 function writeDB(id, name, message){
     let location = `'Вокзал'`;
 
-    let sql = 'INSERT INTO users (id_user, name_user, location, money, lvl, fraction_id, moderator) VALUES (' + [`'`+id+`'`, name, location, 100, 1, 0, 0].join(',') + ')';
+    let sql = 'INSERT INTO users VALUES (' + [`'`+id+`'`, name, location, 100, 1, 0, 0].join(',') + ')';
     db.query(sql, (err) => {
         if (err) return console.error(err.message);
         role();
