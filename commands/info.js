@@ -5,15 +5,16 @@ module.exports.run = async (bot, message, args, db) => {
     message.delete().catch(error =>message.reply("Ошибка"));
 
     let id = message.author.id;
+    let idbd = `'`+id+`'`;
 
     //Поиск игрока по id что бы получить всю информацию из бд
-    let sql = `SELECT * FROM users WHERE id_user = ${`'`+id+`'`}`;
+    let sql = `SELECT * FROM users WHERE id_user = ${idbd}`;
     db.query(sql, (err, result) => {
         if (err) {
             console.error(err.message);
         }
 
-        if(result == undefined) notreg(message); //Игрок не зарегестрирован
+        if(result.id_user == undefined) notreg(message); //Игрок не зарегестрирован
         else{
         //Поиск названия фракции по fraction_id игрока
         //let sql = `SELECT * FROM fractions WHERE fraction_id = ${result.fraction_id}`;
