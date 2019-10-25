@@ -28,7 +28,7 @@ function findDB(id, name, message, named){
                if (err) {
                   console.error(err.message);
                } 
-               if(result2 == undefined){
+               if(result2.name_user == undefined){
                   if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('I don\'t have permission to change your nickname!');
                   message.member.setNickname(named);
                   let id = message.author.id;
