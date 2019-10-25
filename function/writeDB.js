@@ -2,9 +2,10 @@ const Discord = require('discord.js');
 
 function writeDB(id, name, message, db){
     let location = `'Вокзал'`;
+    let idbd = `'`+id+`'`;
 
     console.log("lol");
-    let sql = 'INSERT INTO users VALUES (' + [`'`+id+`'`, name, location, 100, 1, 0, 0].join(',') + ')';
+    let sql = 'INSERT INTO users VALUES (' + [idbd, name, location, 100, 1, 0, 0].join(',') + ')';
     db.query(sql, (err) => {
         if (err) return console.error(err.message);
         console.log("kek");
