@@ -34,7 +34,7 @@ function findDB(id, name, message, named){
                   let id = message.author.id;
                   let member = message.mentions.members.first() || message.guild.members.get(id);
                   member.removeRole('595555181152829440');
-                  writeDB(id, name, message);
+                  writeDB(id, name, message, db);
                }
                else{
                   return message.author.send(`Ник занят, попробуйте ввести другой!`);

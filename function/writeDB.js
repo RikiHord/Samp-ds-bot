@@ -1,22 +1,13 @@
 const Discord = require('discord.js');
 
-const {Client} = require('pg');
-const db = new Client({
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  host: process.env.HOST,
-  port: 5432,
-  database: process.env.DATABASE
-});
-
-db.connect();
-
 function writeDB(id, name, message){
     let location = `'Вокзал'`;
 
+    console.log("lol");
     let sql = 'INSERT INTO users VALUES (' + [`'`+id+`'`, name, location, 100, 1, 0, 0].join(',') + ')';
     db.query(sql, (err) => {
         if (err) return console.error(err.message);
+        console.log("kek");
         role();
         return message.channel.send(`Поздравляем с регистрацией. Ваш ник в игре: ${name}`);
     });
