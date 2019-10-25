@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-function writeDB(id, name, message){
+function writeDB(id, name, message, db){
     let location = `'Вокзал'`;
 
     console.log("lol");
