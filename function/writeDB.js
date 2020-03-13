@@ -5,7 +5,11 @@ function writeDB(id, name, message, db){
     let idbd = `'`+id+`'`;
 
     console.log("lol");
-    let sql = 'INSERT INTO users VALUES (' + [idbd, name, location, 100, 1, 0, 0].join(',') + ')';
+    let sql = {
+        text: `INSERT INTO users VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        values: [idbd, name, location, 100, 1, 0, 0]
+    }
+    //[idbd, name, location, 100, 1, 0, 0].join(',')
     db.query(sql, (err) => {
         if (err) return console.error(err.message);
         console.log("kek");
